@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import CoreData
 import MapKit
+import AVFoundation
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
     
@@ -19,7 +20,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var totalInLabel: UILabel!
     @IBOutlet weak var totalOutLabel: UILabel!
     
-    
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "")
     
     @IBOutlet weak var mapView: MKMapView!
     var locationManager = CLLocationManager()
@@ -95,7 +97,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             user.append(newUser)
         }
         timeSpent = user[0].timeSpent
-        
     }
         // Do any additional setup after loading the view, typically from a nib.
     
@@ -119,13 +120,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 atDojo = false
                 exitTime = Date()
                 user[0].timeSpent += Int32(Date().timeIntervalSince(enterTime))
-
+                self.myUtterance = AVSpeechUtterance(string: "See you later")
+                self.myUtterance.rate = 0.3
+                self.synth.speak(self.myUtterance)
             }
         }
         if(locations[locations.count-1].distance(from: dojoLocation) < 25){
             if(!atDojo){
                 atDojo = true
                 enterTime = Date()
+                self.myUtterance = AVSpeechUtterance(string: "Happy Coding")
+                self.myUtterance.rate = 0.3
+                self.synth.speak(self.myUtterance)
             }
         }
         var duration = Int32(0)
@@ -141,35 +147,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             dateFormatter.locale = Locale(identifier: "en_US")
             let timeEnter = dateFormatter.string(from: enterTime)
             startLabel.text = "Start: \(timeEnter)"
-        }
-        else {
+        } else {
             currentStatusLabel.text = "Slacker!"
             currentStatusLabel.textColor = UIColor.red
             startLabel.text = "You are not at the Dojo"
         }
+        
         let durationMin = Int(floor(Double(duration / 60)))
         let durationSec = duration % 60
         durationLabel.text = "Duration: \(durationMin) Minutes and \(durationSec) Seconds"
-        
         
         let totalin = Int32(user[0].timeSpent + duration)
         let totalInMin = Int(floor(Double(totalin / 60)))
         let totalInSec = totalin % 60
         totalInLabel.text = "Total In: \(totalInMin) Minutes and \(totalInSec) Seconds"
         
-        
         let totalout = Int32(Date().timeIntervalSince(user[0].dateStart!)) - totalin
         let totalOutMin = Int(floor(Double(totalout / 60)))
         let totalOutSec = totalout % 60
         totalOutLabel.text = "Total Out: \(totalOutMin) Minutes and \(totalOutSec) Seconds"
         
-
         print(Int32(Date().timeIntervalSince(user[0].dateStart!)), " time since first started")
         print(atDojo, " are you at the dojo")
         print(Int32(Date().timeIntervalSince(enterTime)), " current visit duration")
     }
-    
-    
 
     func fetchAllItems() -> Int{
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
@@ -177,20 +178,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             let result = try managedObjectContext.fetch(request)
             user = result as! [User]
             return user.count
-        } catch
-        {
+        } catch {
             print("\(error)")
-
         }
         return -1
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-
 }
 
