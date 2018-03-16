@@ -130,8 +130,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         if enterTime > exitTime{
             duration = Int32(Date().timeIntervalSince(enterTime))
         }
-
-        startLabel.text = "Start: \(enterTime)"
+        if(atDojo){
+            currentStatusLabel.text = "Happy Coding!"
+            currentStatusLabel.textColor = UIColor.green
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .medium
+            dateFormatter.locale = Locale(identifier: "en_US")
+            let timeEnter = dateFormatter.string(from: enterTime)
+            startLabel.text = "Start: \(timeEnter)"
+        }
+        else {
+            currentStatusLabel.text = "Slacker!"
+            currentStatusLabel.textColor = UIColor.red
+            startLabel.text = "You are not at the Dojo"
+        }
+        
         durationLabel.text = "Duration: \(duration)"
         let totalin = Int32(user[0].timeSpent + duration)
         totalInLabel.text = "Total In: \(totalin)"

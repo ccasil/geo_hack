@@ -15,8 +15,8 @@
 		4A80AD8E205B23360027A70D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A80AD8C205B23360027A70D /* LaunchScreen.storyboard */; };
 		4A80AD99205B23360027A70D /* geo_hackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80AD98205B23360027A70D /* geo_hackTests.swift */; };
 		4A80ADA4205B23360027A70D /* geo_hackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A80ADA3205B23360027A70D /* geo_hackUITests.swift */; };
+		4A80ADB4205B678E0027A70D /* codingdojoicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4A80ADB3205B678E0027A70D /* codingdojoicon.jpg */; };
 		DD90B81A205B403800131C34 /* coding_dojo_logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DD90B819205B403800131C34 /* coding_dojo_logo_white.png */; };
-		DD90B81C205B461100131C34 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90B81B205B461100131C34 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +51,8 @@
 		4A80AD9F205B23360027A70D /* geo_hackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = geo_hackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A80ADA3205B23360027A70D /* geo_hackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geo_hackUITests.swift; sourceTree = "<group>"; };
 		4A80ADA5205B23360027A70D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A80ADB3205B678E0027A70D /* codingdojoicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = codingdojoicon.jpg; path = Assets.xcassets/codingdojoicon.jpg; sourceTree = "<group>"; };
 		DD90B819205B403800131C34 /* coding_dojo_logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coding_dojo_logo_white.png; sourceTree = "<group>"; };
-		DD90B81B205B461100131C34 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +106,10 @@
 				4A80AD80205B23360027A70D /* AppDelegate.swift */,
 				4A80AD82205B23360027A70D /* ViewController.swift */,
 				4A80AD84205B23360027A70D /* Main.storyboard */,
-				DD90B81B205B461100131C34 /* MapView.swift */,
 				DD90B819205B403800131C34 /* coding_dojo_logo_white.png */,
 				4A80AD8A205B23360027A70D /* Assets.xcassets */,
 				4A80AD8C205B23360027A70D /* LaunchScreen.storyboard */,
+				4A80ADB3205B678E0027A70D /* codingdojoicon.jpg */,
 				4A80AD8F205B23360027A70D /* Info.plist */,
 				4A80AD87205B23360027A70D /* geo_hack.xcdatamodeld */,
 			);
@@ -241,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A80ADB4205B678E0027A70D /* codingdojoicon.jpg in Resources */,
 				DD90B81A205B403800131C34 /* coding_dojo_logo_white.png in Resources */,
 				4A80AD8E205B23360027A70D /* LaunchScreen.storyboard in Resources */,
 				4A80AD8B205B23360027A70D /* Assets.xcassets in Resources */,
@@ -270,7 +271,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A80AD83205B23360027A70D /* ViewController.swift in Sources */,
-				DD90B81C205B461100131C34 /* MapView.swift in Sources */,
 				4A80AD89205B23360027A70D /* geo_hack.xcdatamodeld in Sources */,
 				4A80AD81205B23360027A70D /* AppDelegate.swift in Sources */,
 			);
