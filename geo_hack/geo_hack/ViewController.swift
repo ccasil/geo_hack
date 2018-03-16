@@ -126,7 +126,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 enterTime = Date()
             }
         }
-        print(user[0].timeSpent, " total time spent")
+        var duration = Int32(0)
+        if enterTime > exitTime{
+            duration = Int32(Date().timeIntervalSince(enterTime))
+        }
+
+        startLabel.text = "Start: \(enterTime)"
+        durationLabel.text = "Duration: \(duration)"
+        let totalin = Int32(user[0].timeSpent + duration)
+        totalInLabel.text = "Total In: \(totalin)"
+        let totalout = Int32(Date().timeIntervalSince(user[0].dateStart!)) - totalin
+        totalOutLabel.text = "Total Out: \(totalout)"
+        
+
         print(Int32(Date().timeIntervalSince(user[0].dateStart!)), " time since first started")
         print(atDojo, " are you at the dojo")
         print(Int32(Date().timeIntervalSince(enterTime)), " current visit duration")
