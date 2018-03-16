@@ -121,8 +121,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 exitTime = Date()
                 user[0].timeSpent += Int32(Date().timeIntervalSince(enterTime))
                 self.myUtterance = AVSpeechUtterance(string: "See you later")
-                self.myUtterance.rate = 0.3
+                self.myUtterance.rate = 0.4
                 self.synth.speak(self.myUtterance)
+                
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print ("\(error)")
+                }
             }
         }
         if(locations[locations.count-1].distance(from: dojoLocation) < 25){
@@ -130,10 +136,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 atDojo = true
                 enterTime = Date()
                 self.myUtterance = AVSpeechUtterance(string: "Happy Coding")
-                self.myUtterance.rate = 0.3
+                self.myUtterance.rate = 0.4
                 self.synth.speak(self.myUtterance)
             }
         }
+        print(locations[locations.count-1].distance(from: dojoLocation))
         var duration = Int32(0)
         if enterTime > exitTime{
             duration = Int32(Date().timeIntervalSince(enterTime))
@@ -155,17 +162,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         let durationMin = Int(floor(Double(duration / 60)))
         let durationSec = duration % 60
-        durationLabel.text = "Duration: \(durationMin) Minutes and \(durationSec) Seconds"
+        durationLabel.text = "Duration: \(durationMin) mins and \(durationSec) secs"
         
         let totalin = Int32(user[0].timeSpent + duration)
         let totalInMin = Int(floor(Double(totalin / 60)))
         let totalInSec = totalin % 60
-        totalInLabel.text = "Total In: \(totalInMin) Minutes and \(totalInSec) Seconds"
+        totalInLabel.text = "Total In: \(totalInMin) mins and \(totalInSec) secs"
         
         let totalout = Int32(Date().timeIntervalSince(user[0].dateStart!)) - totalin
         let totalOutMin = Int(floor(Double(totalout / 60)))
         let totalOutSec = totalout % 60
-        totalOutLabel.text = "Total Out: \(totalOutMin) Minutes and \(totalOutSec) Seconds"
+        totalOutLabel.text = "Total Out: \(totalOutMin) mins and \(totalOutSec) secs"
         
         print(Int32(Date().timeIntervalSince(user[0].dateStart!)), " time since first started")
         print(atDojo, " are you at the dojo")
