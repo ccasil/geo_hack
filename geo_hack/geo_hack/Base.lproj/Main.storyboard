@@ -73,7 +73,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="currentStatusLabel" destination="wy7-KW-euC" id="uvv-ZT-sKw"/>
+                        <outlet property="durationLabel" destination="doJ-G7-gbA" id="WVF-HR-LgY"/>
                         <outlet property="mapView" destination="pnK-AS-1fK" id="RQg-Ef-ENK"/>
+                        <outlet property="startLabel" destination="NVf-j4-XOy" id="U0R-Oq-RqX"/>
+                        <outlet property="totalInLabel" destination="mED-q2-4nP" id="EFP-gU-Eft"/>
+                        <outlet property="totalOutLabel" destination="JQG-Ti-P5S" id="8Rj-Zu-ExX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
