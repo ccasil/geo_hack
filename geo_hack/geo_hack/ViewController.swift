@@ -8,12 +8,29 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
     
-    let locationManager = CLLocationManager()
+    @IBOutlet weak var mapView: MKMapView!
+    var locationManager = CLLocationManager()
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // 1
+        let location = CLLocationCoordinate2D(latitude: 37.3754, longitude: -121.910158)
+        
+        // 2
+        let span = MKCoordinateSpanMake(0.001, 0.001)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        
+        //3
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        annotation.title = "Coding Dojo"
+        annotation.subtitle = "Silicon Valley"
+        mapView.addAnnotation(annotation)
 
 
         func enableBasicLocationServices() {
