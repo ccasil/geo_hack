@@ -26,11 +26,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
 
     var atDojo = false
     let dojoLocation = CLLocation(latitude: 37.37554100, longitude: -121.91009960)
-    let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 37.37554100, longitude: -121.91009960), radius: 20.0, identifier: "Dojo")
+    let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: 37.37554100, longitude: -121.91009960), radius: 10.0, identifier: "Dojo")
     var enterTime = Date()
     var exitTime = Date()
-    var timeSpent = Int32(0)
+
     var user: [User] = []
+    var timeSpent = Int32(0)
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
 
@@ -93,6 +94,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             newUser.dateStart = Date()
             user.append(newUser)
         }
+        timeSpent = user[0].timeSpent
         
     }
         // Do any additional setup after loading the view, typically from a nib.
@@ -145,18 +147,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             currentStatusLabel.textColor = UIColor.red
             startLabel.text = "You are not at the Dojo"
         }
+        let durationMin = Int(floor(Double(duration / 60)))
+        let durationSec = duration % 60
+        durationLabel.text = "Duration: \(durationMin) Minutes and \(durationSec) Seconds"
         
-        durationLabel.text = "Duration: \(duration)"
+        
         let totalin = Int32(user[0].timeSpent + duration)
-        totalInLabel.text = "Total In: \(totalin)"
+        let totalInMin = Int(floor(Double(totalin / 60)))
+        let totalInSec = totalin % 60
+        totalInLabel.text = "Total In: \(totalInMin) Minutes and \(totalInSec) Seconds"
+        
+        
         let totalout = Int32(Date().timeIntervalSince(user[0].dateStart!)) - totalin
-        totalOutLabel.text = "Total Out: \(totalout)"
+        let totalOutMin = Int(floor(Double(totalout / 60)))
+        let totalOutSec = totalout % 60
+        totalOutLabel.text = "Total Out: \(totalOutMin) Minutes and \(totalOutSec) Seconds"
         
 
         print(Int32(Date().timeIntervalSince(user[0].dateStart!)), " time since first started")
         print(atDojo, " are you at the dojo")
         print(Int32(Date().timeIntervalSince(enterTime)), " current visit duration")
     }
+    
     
 
     func fetchAllItems() -> Int{
